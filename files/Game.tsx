@@ -1,4 +1,3 @@
-
 // import React, { useState } from 'react';
 // import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, ImageBackground } from 'react-native';
 // import WordGrid from './WordGrid'; 
@@ -37,37 +36,28 @@
 
 //   return (
  
-//     <View style={styles.container}>
+//     <ImageBackground source={require('../info/gamebg.png')} style={styles.container}>
 //       <View style={styles.topButtons}>
 //         <TouchableOpacity onPress={() => navigation.navigate('LevelsPage')}>
 //           <Image source={require('../info/level.png')} style={styles.buttonIcon} />
 //         </TouchableOpacity>
 //       </View>
-//       <WordGrid grid={grid} handlePress={handlePress} />
-//       <View style={styles.wordList}>
+//        <WordGrid grid={grid} handlePress={handlePress} />
+//         <View style={styles.wordList}>
 //         {levelData?.words?.map((word: any, index: any) => (
 //           <Text key={index} style={[styles.word, foundWords.includes(word) ? styles.wordFound : styles.wordHidden]}>
 //             {word}
 //           </Text>
 //         ))}
 //       </View>
-//       <View style={styles.wordListContainer}>
-//         {levelData?.words?.map((word: any, index: any) => (
-//           <Text key={index} style={index === visibleWordIndex ? styles.visibleWord : styles.blurredWord}>
-//             {word}
-//           </Text>
-//         ))}
-//       </View>
-//           <View style={styles.wordListContainer}>
+//     <View style={styles.wordListContainer}>
 //         {levelData.words.map((word: string, index: number) => (
 //       <Text key={index} style={index === visibleWordIndex ? styles.visibleWord : styles.blurredWord}>
 //         {word}
 //         </Text>
 //       ))}
 //     </View>
-//       <View style={styles.wordListContainer}>
-//       </View>
-//     </View>
+//     </ImageBackground>
 
 //   );
 // };
@@ -152,6 +142,7 @@
 //   const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
 //   const levelData = route.params?.levelData || { words: [] }; 
 //   const [foundWords, setFoundWords] = useState<string[]>([]);
+//   const [foundWordPositions, setFoundWordPositions] = useState(new Set());
 //   const visibleWordIndex = 0;
 //   const navigation = useNavigation<any>();
   
@@ -163,10 +154,40 @@
 
 //   const handlePress = (word: string) => { 
 //     if (levelData?.words?.includes(word) && !foundWords.includes(word)) {
+//    const positions = [];
+//       for (let rowIndex = 0; rowIndex < grid.length; rowIndex++) {
+//         const row = grid[rowIndex];
+//         for (let letterIndex = 0; letterIndex < row.length; letterIndex++) {
+//           const letter = row[letterIndex];
+//           if (letter === word[0]) {
+          
+//             let found = true;
+//             for (let i = 1; i < word.length; i++) {
+//               if (grid[rowIndex + i]?.[letterIndex] !== word[i]) {
+//                 found = false;
+//                 break;
+//               }
+//             }
+//             if (found) {
+             
+//               for (let i = 0; i < word.length; i++) {
+//                 positions.push(`${rowIndex + i}-${letterIndex}`);
+//               }
+//             }
+//           }
+//         }
+//       }
+//       setFoundWordPositions(new Set([...foundWordPositions, ...positions]));
 //       setFoundWords((prevWords) => [...prevWords, word]); 
 //     }
 //   };
   
+  
+//   const handleWordFound = (word: any, positions: any) => {
+   
+//     setFoundWords([...foundWords, word]);
+//     setFoundWordPositions(new Set([...foundWordPositions, ...positions]));
+//   };
 
 //   return (
  
@@ -176,7 +197,12 @@
 //           <Image source={require('../info/level.png')} style={styles.buttonIcon} />
 //         </TouchableOpacity>
 //       </View>
-//        <WordGrid grid={grid} handlePress={handlePress} />
+//       <WordGrid
+//        grid={grid}
+//        handlePress={handlePress}
+//        foundWordPositions={foundWordPositions}
+//       />
+
 //         <View style={styles.wordList}>
 //         {levelData?.words?.map((word: any, index: any) => (
 //           <Text key={index} style={[styles.word, foundWords.includes(word) ? styles.wordFound : styles.wordHidden]}>
@@ -184,13 +210,13 @@
 //           </Text>
 //         ))}
 //       </View>
-//     <View style={styles.wordListContainer}>
-//         {levelData.words.map((word: string, index: number) => (
-//       <Text key={index} style={index === visibleWordIndex ? styles.visibleWord : styles.blurredWord}>
-//         {word}
-//         </Text>
-//       ))}
-//     </View>
+    // <View style={styles.wordListContainer}>
+    //     {levelData.words.map((word: string, index: number) => (
+    //   <Text key={index} style={index === visibleWordIndex ? styles.visibleWord : styles.blurredWord}>
+    //     {word}
+    //     </Text>
+    //   ))}
+    // </View>
 //     </ImageBackground>
 
 //   );
@@ -323,6 +349,8 @@ const GameScreen = () => {
     setFoundWordPositions(new Set([...foundWordPositions, ...positions]));
   };
 
+  console.log('Level data words:', levelData.words);
+
   return (
  
     <ImageBackground source={require('../info/gamebg.png')} style={styles.container}>
@@ -331,27 +359,20 @@ const GameScreen = () => {
           <Image source={require('../info/level.png')} style={styles.buttonIcon} />
         </TouchableOpacity>
       </View>
-      {/* <WordGrid grid={grid} foundWordPositions={foundWordPositions} /> */}
       <WordGrid
        grid={grid}
        handlePress={handlePress}
        foundWordPositions={foundWordPositions}
       />
-
-        <View style={styles.wordList}>
-        {levelData?.words?.map((word: any, index: any) => (
-          <Text key={index} style={[styles.word, foundWords.includes(word) ? styles.wordFound : styles.wordHidden]}>
-            {word}
-          </Text>
-        ))}
-      </View>
-    <View style={styles.wordListContainer}>
-        {levelData.words.map((word: string, index: number) => (
-      <Text key={index} style={index === visibleWordIndex ? styles.visibleWord : styles.blurredWord}>
-        {word}
-        </Text>
-      ))}
+   <View style={styles.wordListContainer}>
+     {levelData.words.map((word: string, index: number) => (
+      <View key={index} style={styles.wordBox}>
+      <Text style={styles.wordText}>
+        {word.toLowerCase()}
+      </Text>
     </View>
+  ))}
+</View>
     </ImageBackground>
 
   );
@@ -361,7 +382,6 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    paddingTop: 20, 
     paddingHorizontal: 20,
     justifyContent: 'space-between',
   },
@@ -383,8 +403,30 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    paddingVertical: 20, 
+    backgroundColor: '#FFF',
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    marginBottom: 20,
+    elevation: 5, 
+    shadowColor: '#000', 
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25, 
+    shadowRadius: 3.84,
   },
+  wordBox: {
+    backgroundColor: 'transparent',
+    borderRadius: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    margin: 5,
+  },
+  wordText: {
+    fontSize: 18,
+    color: '#333',
+    fontWeight: 'bold',
+  },
+  
   visibleWord: {
     fontSize: 20,
     margin: 5,

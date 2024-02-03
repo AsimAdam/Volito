@@ -273,9 +273,15 @@ const LevelsPage = () => {
   const navigation = useNavigation<any>();
   const [unlockedLevels, setUnlockedLevels] = useState<any>(3);
   
-  const handleLevelPress = (levelData: any) => {
+//   const handleLevelPress = (levelData: any) => {
+//     navigation.navigate('GameScreen', { levelData });
+//   };
+
+const handleLevelPress = (levelData: Level) => {
+    console.log('Navigating to GameScreen with levelData:', levelData);
     navigation.navigate('GameScreen', { levelData });
   };
+  
 
   const renderStars = (levelIndex: any) => {
     if (levelIndex < 3) { 
