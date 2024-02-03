@@ -10,6 +10,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import GameScreen from './files/Game';
 import LevelsPage from './files/LevelsPage';
+import Score from './files/Score';
 
 
 
@@ -25,8 +26,10 @@ function App(): React.JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen name="GameScreen" component={GameScreen} options={{ headerShown: false }} />
       <Stack.Screen name="LevelsPage" component={LevelsPage} options={{ headerShown: false }} />
+      <Stack.Screen name="GameScreen" component={GameScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Score" component={Score} options={{ headerShown: false }} />
+     
     </Stack.Navigator>
   </NavigationContainer>
   ); 

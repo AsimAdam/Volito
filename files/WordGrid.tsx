@@ -123,7 +123,7 @@ const tileSize = (width - 60) / numColumns;
 
 const WordGrid = ({ grid, handlePress, foundWordPositions }: any) => {
 
-        const renderLetter = (letter: any, position: any) => {
+    const renderLetter = (letter: any, position: any) => {
           const isFound = foundWordPositions.has(position);
       
           const letterStyles = [styles.letter];
@@ -137,7 +137,6 @@ const WordGrid = ({ grid, handlePress, foundWordPositions }: any) => {
             </Text>
           );
         };
-      
       return (
         <View style={styles.grid}>
           {grid.map((row: any, rowIndex: any) => (
@@ -203,3 +202,111 @@ const styles = StyleSheet.create({
 });
 
 export default WordGrid;
+
+
+// import React from 'react';
+// import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+
+
+// interface FoundWordDetails {
+//     color: string;
+//     positions: string[];
+//   }
+  
+
+// const { width } = Dimensions.get('window');
+// const numColumns = 10;
+// const tileSize = (width - 60) / numColumns;
+
+// const WordGrid = ({ grid, foundWordPositions, handlePress }: any) => {
+
+//     const getCellBackgroundColor = (rowIndex: any, letterIndex: any) => {
+//       const positionKey = `${rowIndex}-${letterIndex}`;
+//       let backgroundColor = '#fff'; 
+  
+//       foundWordPositions.forEach((value: any, key: any) => {
+//         if (value.positions.includes(positionKey)) {
+//           backgroundColor = value.color; 
+//         }
+//       });
+  
+//       return backgroundColor;
+//     };
+
+//     const renderLetter = (letter: any, rowIndex: any, letterIndex: any) => {
+//         const positionKey = `${rowIndex}-${letterIndex}`;
+//         const foundWordDetailsArray: FoundWordDetails[] = Array.from(foundWordPositions.values()) as FoundWordDetails[];
+//         const isFound = foundWordDetailsArray.some(value => value.positions.includes(positionKey));
+      
+//         return (
+//           <Text style={[styles.letter, isFound && styles.foundLetter]}>
+//             {letter}
+//           </Text>
+//         );
+//       };
+      
+      
+  
+//     return (
+//       <View style={styles.grid}>
+//         {grid.map((row: any, rowIndex: any) => (
+//           <View key={rowIndex} style={styles.row}>
+//             {row.map((letter: any, letterIndex: any) => (
+//               <TouchableOpacity
+//                 key={`cell-${rowIndex}-${letterIndex}`}
+//                 onPress={() => handlePress(letter, rowIndex, letterIndex)}
+//                 style={[styles.cell, { backgroundColor: getCellBackgroundColor(rowIndex, letterIndex) }]}
+//               >
+//                 {renderLetter(letter, rowIndex, letterIndex)}
+//               </TouchableOpacity>
+//             ))}
+//           </View>
+//         ))}
+//       </View>
+//     );
+//   };
+  
+// const styles = StyleSheet.create({
+//    grid: {
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//         width: '100%',
+//         alignSelf: 'center',
+//         backgroundColor: '#ffffff',
+//         borderRadius: 20, 
+//         padding: 5,
+//         marginVertical: 20, 
+//         shadowColor: '#000',
+//         shadowOffset: {
+//           width: 0,
+//           height: 2,
+//         },
+//         shadowOpacity: 0.25,
+//         shadowRadius: 3.84,
+//         elevation: 5,
+//       },
+//   row: {
+//     flexDirection: 'row',
+//     justifyContent: 'center',
+//   },
+//   cell: {
+//     width: tileSize,
+//     height: tileSize,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     margin: 1,
+//   },
+//   letter: {
+//     fontSize: 16,
+//     fontWeight: 'bold',
+//     color: '#333', 
+//   },
+//   foundLetter: {
+//     fontSize: tileSize * 0.4,
+//     color: 'green', 
+//     fontWeight: 'bold',
+//   },
+  
+// });
+
+// export default WordGrid;
