@@ -451,31 +451,6 @@ const handleLevelPress = (levelData: Level) => {
     return null;
   };
 
-// const renderLevelButton = (level: any) => {
-//     const locked = level.level >= unlockedLevels;
-    
-//     return (
-//       <TouchableOpacity
-//         key={level.level}
-//         style={styles.levelButton}
-//         onPress={() => handleLevelPress(level)}
-//         disabled={locked}
-//       >
-//         <ImageBackground source={levelButtonBg} style={styles.levelButtonBackground}>
-      
-//           {level.level < 4 && renderStars(level.level - 1)}
-//           {locked ? (
-           
-//             <Image source={lockIcon} style={styles.lockIcon} />
-//           ) : (
-       
-//             <Text style={styles.levelText}>{level.level}</Text>
-//           )}
-//         </ImageBackground>
-//       </TouchableOpacity>
-//     );
-//   };
-
 const renderLevelButton = (level: any) => {
  
     const locked = level.level >= 4;
