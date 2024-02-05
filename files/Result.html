@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Score</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007aff;
+        }
+        .message {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="score" id="score">0</div>
+        <div class="message">You need to finish all the levels to get the score to open the locked one's.</div>
+    </div>
+    <script>
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const score = urlParams.get('score');
+        if (score !== null) {
+            document.getElementById('score').textContent = score;
+        }
+    </script>
+</body>
+</html>

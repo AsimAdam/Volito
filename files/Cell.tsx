@@ -8,8 +8,8 @@ const Cell = ({ letter, isSelected }: any) => {
 
   const textStyle = {
     color: isSelected ? 'white' : 'black',
-    fontSize: 16, // Adjust the font size to fit inside the cell
-    paddingHorizontal: 4, // Reduce horizontal padding to decrease spacing
+    fontSize: 16,
+    paddingHorizontal: 4, 
   };
 
   return (
@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
     height: 35,
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1, // Add a small border to separate cells
-    borderColor: 'transparent', // Set the border color to transparent
+    borderWidth: 1, 
+    borderColor: 'transparent',
   },
   letter: {
     fontSize: 16,

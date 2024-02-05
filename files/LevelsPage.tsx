@@ -475,7 +475,6 @@ const renderLevelButton = (level: any) => {
     );
   };
   
-  
    const levelRows: LevelRows = levelsData.reduce((rows: LevelRows, level: Level, index: number) => {
         const rowIndex = Math.floor(index / 3);
         if (!rows[rowIndex]) {
