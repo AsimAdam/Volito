@@ -1,9 +1,10 @@
+
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const Cell = ({ letter, isSelected }: any) => {
+const Cell = ({ letter, isSelected, color }: any) => {
   const cellStyle = {
-    backgroundColor: isSelected ? 'red' : 'transparent',
+    backgroundColor: isSelected ? color : 'transparent',
   };
 
   const textStyle = {
