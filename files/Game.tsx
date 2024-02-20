@@ -42,17 +42,64 @@ const GameScreen = () => {
   
   const initializeGridWithWords = () => {
     let tempGrid = Array.from({ length: numColumns }, () =>
-      Array.from({ length: numColumns }, () => String.fromCharCode(65 + Math.floor(Math.random() * 26)))
+      Array.from({ length: numColumns }, () => '')
     );
-
-    levelData.words.forEach((word, index) => {
-      const maxLength = Math.min(word.length, numColumns);
-      for (let i = 0; i < maxLength; i++) {
-        tempGrid[index][i] = word[i].toUpperCase();
+  
+    const placeWord = (word: any, orientation: any, row: any, col: any) => {
+      for (let i = 0; i < word.length; i++) {
+        if (orientation === 'horizontal') {
+          tempGrid[row][col + i] = word[i];
+        } else {
+          tempGrid[row + i][col] = word[i];
+        }
+      }
+    };
+  
+    const checkSpace = (word: any, orientation: any, row: any, col: any) => {
+      if (orientation === 'horizontal') {
+        if (col + word.length > numColumns) return false;
+        for (let i = 0; i < word.length; i++) {
+          if (tempGrid[row][col + i] !== '') return false;
+        }
+      } else {
+        if (row + word.length > numColumns) return false;
+        for (let i = 0; i < word.length; i++) {
+          if (tempGrid[row + i][col] !== '') return false;
+        }
+      }
+      return true;
+    };
+  
+    levelData.words.forEach((word) => {
+      let placed = false;
+      let attempts = 0;
+  
+      while (!placed && attempts < 50) {
+        const orientation = Math.random() > 0.5 ? 'horizontal' : 'vertical';
+        const row = Math.floor(Math.random() * numColumns);
+        const col = Math.floor(Math.random() * numColumns);
+  
+        if (checkSpace(word.toUpperCase(), orientation, row, col)) {
+          placeWord(word.toUpperCase(), orientation, row, col);
+          placed = true;
+        }
+  
+        attempts++;
       }
     });
+  
+    for (let row = 0; row < numColumns; row++) {
+      for (let col = 0; col < numColumns; col++) {
+        if (tempGrid[row][col] === '') {
+          tempGrid[row][col] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+        }
+      }
+    }
+  
     return tempGrid;
   };
+  
+
 
   useEffect(() => {
   
@@ -112,10 +159,7 @@ const GameScreen = () => {
     }
   };
   
-  
-  
 
-  
   
   const loadGameData = async () => {
     try {
