@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   View,
@@ -15,11 +14,11 @@ const starIcon = require('../info/star.png');
 const lockIcon = require('../info/lock.png');
 
 const levelsData = [
-  { level: 1, words: ['CAT', 'DOG', 'BIRD', 'MOUSE', 'CAR', 'PEN', 'ROOM', 'MAN'], complexity: 'Easy' },
-  { level: 2, words: ['LION', 'TIGER', 'BEAR'], complexity: 'Medium' },
-  { level: 3, words: ['ELEPHANT', 'GIRAFFE', 'HIPPOPOTAMUS'], complexity: 'Hard' },
-  { level: 4, words: ['CROCODILE', 'Rhinoceros', 'Hippopotamus'], complexity: 'Harder' },
-  { level: 5, words: ['CHIMPANZEE', 'ORANGUTAN', 'GORILLA'], complexity: 'Hardest' },
+  { level: 1, words: ['CAT', 'DOG', 'BIRD', 'MOUSE', 'CAR', 'PEN', 'ROOM', 'MAN'], complexity: 'Easy', foundWordsData: [] },
+  { level: 2, words: ['LION', 'TIGER', 'BEAR', 'ELEPHANT', 'GIRAFFE', 'ZEBRA', 'RHINO', 'PANDA'], complexity: 'Medium', foundWordsData: [] },
+  { level: 3, words: ['GIRAFFE', 'HIPPOPOTAMUS', 'KANGAROO', 'FLAMINGO', 'CROCODILE', 'BUFFALO', 'LEOPARD']  , complexity: 'Hard', foundWordsData: [] },
+  { level: 4, words: ['CROCODILE', 'Rhinoceros', 'Hippopotamus', 'Volcano', 'Eclipse', 'Galaxy', 'Pyramid', 'Glacier'], complexity: 'Harder', foundWordsData: [] },
+  { level: 5, words: ['CHIMPANZEE', 'ORANGUTAN', 'GORILLA', 'MANDRILL', 'LEMUR', 'CAPUCHIN', 'TAMARIN', 'GIBBON'], complexity: 'Hardest', foundWordsData: [] },
 ];
 
 interface Level {
